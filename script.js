@@ -13,8 +13,8 @@ const divResultado = document.getElementById("resultado");
 
 botaoBuscar.addEventListener("click", async function () {
     const cidade = campoCidade.value;
-    
-    if(cidade == ""){
+
+    if (cidade == "") {
         return;
     }
 
@@ -24,8 +24,40 @@ botaoBuscar.addEventListener("click", async function () {
         return;
     }
 
-    divResultado.innerHTML = `
+    const botaoBuscar = document.getElementById("btnBuscar");
+    const campoCidade = document.getElementById("cidade");
+    const divPrevisao = document.getElementsById("resultado");
+    const divPrevisao = document.getElementsById("previsao");
+
+    //async serve para pegar um atributo fora 
+    async function buscarPrevisao(cidade) {
+
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${CHAVE_API}&units=metric&lang=pt_br`;
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+        return dados;
+
+    }
+
+    async function realizarBusca(cidade) {
+
+        const dados = await buscarClima(cidade);
+
+        if (dados.cod === "404") {
+            divResultado.innerHTML =
+                "<p> Cidade não encontrada</p>";
+            return;
+
+        }
+
+        const iconUrl = `https://openweathermap.org/img/wn/${dados.weather[0].icon}@2x.png`;
+
+    }
+
+    divResultado.innerHTML =
+        `
         <div class="card-clima">
+            <img src="${iconeUrl}" alt= "${dados.weather[0].description}">
             <h3>${dados.name}</h3>
             <p>${dados.weather[0].description}</p>
             <p><strong>${dados.main.temp}°C</strong></p>
