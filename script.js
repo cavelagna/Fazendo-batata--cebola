@@ -49,13 +49,23 @@ botaoBuscar.addEventListener("click", async function(){
     function montarPrevisao(previsao){
         divPrevisao.innerHTML = "";
 
-        if (item.dt_txt.includes("12:00:00")){
-            const data = new Date(item.dt_txt);
-            const diaSemana = data.toDateString("pt-BR", {weekday: "shot"});
-            const iconeUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
+        for(let i = 0; i < previsao.list.length; i++){
+            const item = previsao.list[i];
+            
+            if (item.dt_txt.includes("12:00:00")){
+                const data = new Date(item.dt_txt);
+                const diaSemana = data.toDateString("pt-BR", {weekday: "shot"});
+                const iconeUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
 
-            divPrevisao += ``
+                divPrevisao.innerHTML += `
+                    <div class="dia-previsao">
+                    <p>${diaSemana}</p>
+                    <img src="${iconeUrl}" alt="${item.weather[0].description}">
+                    <p>${item.main.temp.toFixed(0)}°C</p>
+                `
+            }
         }
+       
     }
 
 
