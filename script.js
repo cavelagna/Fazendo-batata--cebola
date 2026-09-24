@@ -1,11 +1,10 @@
-async function buscarClima(cidade) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${CHAVE_API}&units=metric&lang=pt_br`;
-    //Comparação com a URL antiga: 
-    // https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=6f9444080c1474e786d5bef4993b4736&units=metric&lang=pt_br    
+async function buscarclima(cidade){
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${CHAVE_API}&units=metric&lang=pt_br`
     const resposta = await fetch(url);
-    const dados = await resposta.json();
-    return dados;
+    const dados = await resposta.json()
+    return dados;  /* tem que retornar os dados. Agora a função entrega a resposta da API para a sua variável dados de fora*/
 }
+
 const botaoBuscar = document.getElementById("btnBuscar");
 const campoCidade = document.getElementById("cidade");
 const divResultado = document.getElementById("resultado");
@@ -29,7 +28,7 @@ botaoBuscar.addEventListener("click", async function(){
         }
 
         const iconeUrl = `https://openweathermap.org/img/wn/${dados.weather[0].icon}@2x.png`
-            
+           
         divResultado.innerHTML = `
         <div class="card-clima">
             <img src="${iconeUrl}" alt="${dados.weather[0].description}">
@@ -43,7 +42,7 @@ botaoBuscar.addEventListener("click", async function(){
 
         const previsao = await buscarPrevisao(cidade);
         montarPrevisao(cidade);
-        
+       
     }
 
     function montarPrevisao(previsao){
@@ -51,22 +50,24 @@ botaoBuscar.addEventListener("click", async function(){
 
         for(let i = 0; i < previsao.list.length; i++){
             const item = previsao.list[i];
-            
-            if (item.dt_txt.includes("12:00:00")){
+
+                if (item.dt_txt.includes("12:00:00")){
                 const data = new Date(item.dt_txt);
                 const diaSemana = data.toDateString("pt-BR", {weekday: "shot"});
                 const iconeUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
 
                 divPrevisao.innerHTML += `
-                    <div class="dia-previsao">
+                <div class="dia-previsao">
                     <p>${diaSemana}</p>
                     <img src="${iconeUrl}" alt="${item.weather[0].description}">
-                    <p>${item.main.temp.toFixed(0)}°C</p>
-                `
+                    <p>${item.main.temp.toFixed(0)}ºc</p>
+                </div>
+            `
             }
         }
-       
     }
+
+    botaoBuscar.addEventListener("click", )
 
 
     async function buscarPrevisao(cidade){
@@ -78,4 +79,4 @@ botaoBuscar.addEventListener("click", async function(){
 
 
 
-});
+}); 
