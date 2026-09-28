@@ -7,7 +7,7 @@ async function buscarclima(cidade) {
 
 
 async function buscarPrevisao(cidade) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${CHAVE_API}&units=metric&lang=pt_br`
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${CHAVE_API}&units=metric&lang=pt_br`
     const resposta = await fetch(url);
     const dados = await resposta.json();
     return dados;
@@ -81,7 +81,7 @@ botaoBuscar.addEventListener("click", async function () {
    
     
 
-        botaoBuscar.addEventListener("click",)
+    botaoBuscar.addEventListener("click",)//estava sendo feito
 
 
-}); 
+});
