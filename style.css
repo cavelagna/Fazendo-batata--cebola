@@ -7,7 +7,10 @@ body {
     background: linear-gradient(160deg, #313131, #b2b3b6);
     font-family: Arial, sans-serif;
 }
-
+.fazer-h2 {
+    color: #e2e1e1;
+    margin-bottom: 20px;
+}
 .title {
     color: #e2e1e1;
     margin-bottom: 20px;
