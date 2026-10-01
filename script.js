@@ -78,10 +78,15 @@ botaoBuscar.addEventListener("click", async function () {
     }
 
     const dados = await buscarclima(cidade);
-   
+
+
+});
+
+window.addEventListener("load", async function () {
+    const cidadeSalva = localStorage.getItem("ultimaCidade");
     
-
-    botaoBuscar.addEventListener("click",)//estava sendo feito
-
-
+    if (cidadeSalva) {
+        campoCidade.value = cidadeSalva;
+        realizarBusca(cidadeSalva);
+    }
 });
